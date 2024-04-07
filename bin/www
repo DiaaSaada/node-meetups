@@ -39,7 +39,7 @@ app.set('port', port);
 const server = http.createServer(app);
 
 db.connection(config.database.dsn).then(() => {
-  console.log("DB conected")
+  console.log("DB conected", config.database.dsn)
   server.listen(port);
 })
 

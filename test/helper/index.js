@@ -12,6 +12,7 @@ try {
   db = require('../../server/lib/db');
 } catch (err) {
   console.log('db ignored');
+  console.error(err);
 }
 
 try {
@@ -19,6 +20,7 @@ try {
   UserModel = require('../../server/models/UserModel');
 } catch (err) {
   console.log('UserModel ignored');
+  console.error(err);
 }
 
 try {
@@ -55,7 +57,8 @@ module.exports.validUser = {
 
 module.exports.before = async () => {
   if (db) {
-    await db.connect(config.database.dsn);
+    console.log(db)
+    await db.connection(config.database.dsn);
   }
   if (UserModel) {
     return UserModel.deleteMany({});
@@ -65,9 +68,9 @@ module.exports.before = async () => {
 
 module.exports.after = async () => {
   if (UserModel) {
-    await UserModel.deleteMany({});
+    // await UserModel.deleteMany({});
   }
-  return deleteFilesInDir(config.data.avatars);
+  // return deleteFilesInDir(config.data.avatars);
 };
 
 // Local helper function that creates a user
