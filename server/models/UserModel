@@ -1,0 +1,36 @@
+const mongoose = require('mongoose')
+const emailValidator = require('email-validator')
+
+const UserSchema = mongoose.Schema({
+
+    username: {
+        type: String,
+        reuqired: true,
+        trim: true,
+        index: { uniqu: true },
+        minlength: 3
+
+    },
+
+    email: {
+        type: String,
+        reuqired: true,
+        trim: true,
+        index: { uniqu: true },
+        validate: emailValidator.validate,
+        message: 'this should be a viald email'
+
+    },
+    username: {
+        type: String,
+        reuqired: true,
+        trim: true,
+        index: { uniqu: true },
+        minlength: 8
+
+    },
+    timestamps: true
+
+})
+
+module.exports = mongoose.model('User', UserSchema)
