@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon ./bin/www",
     "start": "node bin/www",
     "test": "npx mocha --exit --recursive test/"
   },
@@ -20,6 +21,7 @@
     "express-session": "^1.18.0",
     "http-errors": "^1.7.1",
     "mongoose": "^8.3.0",
+    "nodemon": "^3.1.0",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
     "pug": "^2.0.3",
