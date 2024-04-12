@@ -21,11 +21,19 @@ module.exports = () => {
 
   router.get('/account', (req, res) => res.render('users/account', { user: req.user }));
 
+
   router.get('/login', (req, res) => res.render('users/login', { error: req.query.error }));
   router.post('/login', passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/users/login?error=true',
   }));
+
+  router.get('/logout', async (req, res, next) => {
+    req.logOut(() => {
+      return res.redirect('/')
+    });
+
+  });
 
   return router;
 };
