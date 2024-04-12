@@ -19,7 +19,12 @@ module.exports = () => {
     return next(new Error());
   });
 
-  router.get('/account', (req, res) => res.render('users/account', { user: req.user }));
+  router.get('/account', (req, res, next) => {
+    if (req.user)
+      return next();
+
+    return res.status(401).end()
+  }, (req, res) => res.render('users/account', { user: req.user }));
 
 
   router.get('/login', (req, res) => res.render('users/login', { error: req.query.error }));
@@ -37,3 +42,12 @@ module.exports = () => {
 
   return router;
 };
+function myAccount() {
+  return (req, res) => res.render('users/account', { user: req.user });
+}
+
+
+function myAccountMiddleware() {
+  return;
+}
+
